@@ -1,0 +1,43 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: 0.0.0.0
+apiEndpoints:
+  customer-api:
+    host: '*'
+    paths:
+      - "/api/customers"
+      - "/api/customers/*"
+    methods: ["GET", "OPTIONS", "PUT", "POST", "PATCH"]
+  admin-api:
+    host: '*'
+    paths:
+      - "/api/customers/*"
+    methods: ["DELETE"]
+    scopes: ["admin"]
+
+serviceEndpoints:
+  localhost:
+    url: http://customer-api:80
+policies:
+- basic-auth
+- cors
+- key-auth
+- proxy
+pipelines:
+- name: default
+  apiEndpoints:
+  - customer-api
+  - admin-api
+  policies:
+    - cors:
+      - action:
+          origin: true
+          methods: 'HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+          allowedHeaders: '*'
+    - key-auth: []
+    - proxy:
+      - action:
+          serviceEndpoint: localhost
+          changeOrigin: true

@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  react-ui:
+    build: ./react-ui/  
+    ports:
+      - 3000:3000
+    volumes:
+      - .\react-ui.:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - express-gateway
+    stdin_open: true 
+
+  express-gateway:
+    image:
+      express-gateway
+    ports:
+      - 8080:8080
+    volumes:
+      - ./eg-data:/var/lib/eg
+    depends_on:
+      - eg-redis
+      - customer-api
+
+  eg-redis:
+    image:
+      redis:alpine
+    volumes:
+      - ./redis-data:/data
+
+  customer-api:
+    build: ./CustomerApi/CustomerApi/
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+volumes:
+  mongo-data:

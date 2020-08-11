@@ -1,0 +1,35 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: 0.0.0.0
+apiEndpoints:
+  api:
+    host: '*'
+    paths: "/ip"
+serviceEndpoints:
+  httpbin:
+    url: https://httpbin.org
+policies:
+- basic-auth
+- cors
+- expression
+- key-auth
+- log
+- oauth2
+- proxy
+- rate-limit
+- jwt
+pipelines:
+- name: default
+  apiEndpoints:
+  - api
+  policies:
+  - jwt:
+    - action:
+        secretOrPublicKey: 3YOsog3y8apxRxit8iL09E
+        checkCredentialExistance: "true"
+  - proxy:
+    - action:
+        serviceEndpoint: httpbin
+        changeOrigin: true

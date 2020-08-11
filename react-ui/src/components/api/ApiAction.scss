@@ -1,0 +1,151 @@
+$green: #31AF76;
+$red: #f93e3e;
+
+.api-action-get {
+    .action-method {
+        background: #3499FE;
+    }
+}
+
+.api-action-post {
+    .action-method {
+        background: $green;
+    }
+}
+
+.api-action-put {
+    .action-method {
+        background: #fca130;
+    }
+}
+
+.api-action-delete {
+    .action-method {
+        background: $red;
+    }
+}
+
+.api-action {
+
+    .wrapper {
+        width: 60%;
+        margin: 1.2em 0 0.8em;
+    }
+    .action-description {
+        // float: left;
+        .endpoint {
+            letter-spacing: 0.02em;
+        }
+
+        width: 84%;
+        display: inline-block;
+    }
+
+    .action-method {
+        font: {
+            weight: 700;
+        }
+
+        min-width: 8em;
+        border-radius: 3px;
+        display: inline-block;
+        padding: 0.1em;
+        margin-right: 0.5em;
+        text-align: center;
+    }
+
+    .execute {
+        button {
+            &:hover {
+                background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+                background-color:#415989;    
+            }
+    
+            &:active {
+                position:relative;
+                top:1px;
+            }
+            &:focus {
+                outline: none !important; 
+            }
+            font: {
+                size: 0.9em;
+            }
+    
+            margin: 0 0.2em;
+            box-shadow: inset 0px -20px 17px 3px #23395e;
+            background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+            background-color: #2e466e;
+            border-radius: 10px;
+            border: 1px solid #1f2f47;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            padding: 0.5em 1.2em;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #263666;
+        }
+
+        // text-align: center;
+        // float: right;
+        display: inline-block;
+    }
+
+    .action-result {
+        button {
+            min-width: 4em;
+        }
+        .table, &>p {
+            font-size: 0.8em;
+            margin-top: 1em;
+        }
+
+        .status {
+            margin: 0.8em 0;
+        }
+    }
+
+
+    margin: 1em 0;
+    overflow-wrap: break-word; 
+    text-align: left;
+    background-color: #1B1D23;
+    border: 1px solid white;
+    border-radius: 6px;
+    // width: 100%;
+    padding: 1.4em 0.8em;
+}
+
+.successful {
+    .status {
+        color: $green;
+    }
+
+    border-color: $green;
+}
+
+.failed {
+    .status {
+        color: $red;
+    }
+
+    border-color: $red;
+}
+
+@media screen and (max-width: 780px) {
+	.api-action {
+        .wrapper {
+            width: 100%;
+        }
+        
+        .action-description {
+            width: 100%;
+            margin-bottom: 1.6em;
+        }
+    
+        text-align: center;
+    }
+
+    
+
+}
